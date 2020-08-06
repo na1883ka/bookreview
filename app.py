@@ -17,9 +17,19 @@ def home():
 @app.route('/review', methods=['POST'])
 def write_review():
 	# 1. 클라이언트가 준 title, author, review 가져오기.
+    title = request.form.get('title')
+    author = request.form.get('author')
+    review = request.form.get('review')
+    print(title, author, review)
 	# 2. DB에 정보 삽입하기
+    doc = {
+        'title' : title,
+        'author' : author,
+        'review' : review
+    }
+    db.reviews.insert_one(doc)
 	# 3. 성공 여부 & 성공 메시지 반환하기
-    return jsonify({'result': 'success', 'msg': '이 요청은 POST!'})
+    return jsonify({'result': 'success', 'msg': '리뷰 저장에 성공했습니당'})
 
 
 @app.route('/review', methods=['GET'])
