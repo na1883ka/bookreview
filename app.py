@@ -19,17 +19,6 @@ def write_review():
 	# 1. 클라이언트가 준 title, author, review 가져오기.
 	# 2. DB에 정보 삽입하기
 	# 3. 성공 여부 & 성공 메시지 반환하기
-    title_receive = request.form['title_give']
-    author_receive = request.form['author_give']
-    bookReview_receive = request.form['bookReview_give']
-    print(title_receive, author_receive, bookReview_receive)
-
-    review = {
-        'title':title_receive,
-        'author': author_receive,
-        'review': bookReview_receive
-    }
-    db.reviews.insert_one(review)
     return jsonify({'result': 'success', 'msg': '이 요청은 POST!'})
 
 
