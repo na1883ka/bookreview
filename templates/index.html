@@ -32,12 +32,27 @@
 
             function makeReview() {
                 // 1. 제목, 저자, 리뷰 내용을 가져옵니다.
+                let title = $('#title').val();
+                let author = $('#author').val();
+                let review = $('#bookReview').val();
                 // 2. 제목, 저자, 리뷰 중 하나라도 입력하지 않았을 경우 alert를 띄웁니다.
+                if (title == '') {
+                    alert('제목을 입력해주세요!');
+                    return;
+                }
+                if (author == '') {
+                    alert('저자를 입력해주세요!');
+                    return;
+                }
+                if (review == '') {
+                    alert('리뷰를 입력해주세요!');
+                    return;
+                }
                 // 3. POST /review 에 저장을 요청합니다.
                 $.ajax({
                     type: "POST",
                     url: "/review",
-                    data: {},
+                    data: {title : title, author : author, review : review},
                     success: function (response) {
                         if (response["result"] == "success") {
                             alert(response["msg"]);
