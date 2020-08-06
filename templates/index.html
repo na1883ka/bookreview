@@ -72,12 +72,30 @@
                     data: {},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(response["msg"]);
+                            {#alert(response["msg"]);#}
+                            let reviews = response['reviews']
+                            for (let i = 0; i < reviews.length; i++) {
+                                let review = reviews[i];
+                                let title = review['title'];
+                                let author = review['author'];
+                                let bookReview = review['review'];
+
+                                makeCard(title, author, bookReview);
+                            }
                         } else {
                             alert("리뷰를 받아오지 못했습니다");
                         }
                     }
                 })
+            }
+            function makeCard(title, author, review) {
+                let tempHtml = `
+                <tr>
+                        <td>${title}</td>
+                        <td>${author}</td>
+                        <td>${review}</td>
+                    </tr>`
+                $('#reviews-box').append(tempHtml);
             }
 
             function validateLength(obj) {
